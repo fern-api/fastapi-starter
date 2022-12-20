@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "fern_fastapi_starter"
+version = "0.0.0"
+description = ""
+authors = []
+
+[tool.poetry.scripts]
+start = "src.fern_fastapi_starter.server:start"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.79.0"
+fastapi-utils = "^0.2.1"
+uvicorn = "^0.18.2"
+pydantic = "^1.9.2"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.971"
+black = "^22.6.0"
+flake8 = "^5.0.4"
+sqlalchemy2-stubs = "^0.0.2-alpha.26"
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+include = '\.pyi?$'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
