@@ -1,5 +1,5 @@
-from fastapi import FastAPI
 import uvicorn
+from fastapi import FastAPI
 
 from .generated.fern.register import register
 from .movies_service import MoviesService
