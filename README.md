@@ -1,7 +1,4 @@
-# FastAPI/React starter repo
-
-This repo is a starter repo for building a FastAPI server + React frontend,
-using [Fern](https://github.com/fern-api/fern).
+# Starter repo for FastAPI + React, using [Fern](https://github.com/fern-api/fern)
 
 **Fern is an open source format for defining REST APIs.** Fern makes it easy to:
 
@@ -134,7 +131,7 @@ and autocomplete:
 
 The API is defined using [Fern](https://www.buildwithfern.com/). The definition
 lives in the [fern/](fern/api/definition) directory. You can edit these YAML files
-to update the API. Check out the [docs] to read more about defining APIs.
+to update the API. Check out the [docs](https://docs.buildwithfern.com/definition) to read more about defining APIs.
 
 Most of the server and frontend code in this repo is **automatically generated
 by Fern.** You can regenerate the code using the Fern CLI:
