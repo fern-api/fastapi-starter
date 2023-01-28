@@ -6,10 +6,11 @@ on:
     branches: [master]
 
 jobs:
-  check:
+  frontend:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./frontend
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v2
