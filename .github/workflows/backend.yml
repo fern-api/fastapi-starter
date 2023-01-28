@@ -24,6 +24,7 @@ jobs:
   
   dockerize:
     runs-on: ubuntu-latest
+    needs: build
     if: ${{ env.GITHUB_REF == 'refs/heads/main' }}
     defaults:
       run:
