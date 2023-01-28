@@ -1,7 +1,4 @@
-# FastAPI + React + Fern starter repo
-
-This repo is a starter repo for building a FastAPI server + React frontend,
-using [Fern](https://github.com/fern-api/fern).
+# Starter repo for FastAPI + React, using [Fern](https://github.com/fern-api/fern)
 
 **Fern is an open source format for defining REST APIs.** Fern makes it easy to:
 
