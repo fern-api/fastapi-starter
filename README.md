@@ -134,7 +134,7 @@ and autocomplete:
 
 The API is defined using [Fern](https://www.buildwithfern.com/). The definition
 lives in the [fern/](fern/api/definition) directory. You can edit these YAML files
-to update the API. Check out the [docs] to read more about defining APIs.
+to update the API. Check out the [docs](https://docs.buildwithfern.com/definition) to read more about defining APIs.
 
 Most of the server and frontend code in this repo is **automatically generated
 by Fern.** You can regenerate the code using the Fern CLI:
