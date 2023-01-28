@@ -1,13 +1,14 @@
-name: "Backend"
+name: "Docker"
 
 on:
-  pull_request:
   push:
     branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: build
+    if: ${{ env.GITHUB_REF == 'refs/heads/main' }}
     defaults:
       run:
         working-directory: ./backend
@@ -19,5 +20,8 @@ jobs:
         uses: snok/install-poetry@v1
       - name: Install dependencies
         run: poetry install
-      - name: mypy
-        run: poetry run mypy
+      - name: Install dependencies
+        run: poetry install
+      - name: Docker build
+        run: | 
+          docker build -f Dockerfile -t "server" .
