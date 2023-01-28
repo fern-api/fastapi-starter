@@ -21,6 +21,8 @@ jobs:
         run: fern generate
         env:
           FERN_TOKEN: dummy
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
       - name: Install dependencies
         run: poetry install
       - name: mypy
