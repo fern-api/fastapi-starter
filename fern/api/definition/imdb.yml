@@ -2,12 +2,10 @@
 
 services:
   http:
-
     MoviesService:
       auth: false
       base-path: /movies
       endpoints:
-
         getMovie:
           method: GET
           path: /{movieId}
@@ -27,11 +25,6 @@ types:
       rating:
         type: double
         docs: The rating scale is one to five stars
-
-  CreateMovieRequest:
-    properties:
-      title: string
-      rating: double
 
 errors:
   MovieDoesNotExistError:
