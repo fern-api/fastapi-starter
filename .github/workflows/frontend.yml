@@ -1,0 +1,30 @@
+name: "Frontend"
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install fern
+        run: npm install -g fern-api
+      - name: fern generate
+        run: fern generate
+        env:
+          FERN_TOKEN: dummy
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: Check formatting
+        run: yarn format:check
+      - name: Build frontend
+        run: yarn build

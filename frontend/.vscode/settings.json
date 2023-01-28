@@ -4,5 +4,8 @@
     "**/.pnp.*": true
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.formatOnSave": true,
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "eslint.nodePath": ".yarn/sdks"
 }
