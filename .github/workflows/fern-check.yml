@@ -15,3 +15,9 @@ jobs:
         run: npm install -g fern-api
       - name: fern check
         run: fern check
+      - name: Verify generated code is up to date
+        run: |
+          fern generate
+          git --no-pager diff --exit-code
+        env:
+          FERN_TOKEN: dummy
