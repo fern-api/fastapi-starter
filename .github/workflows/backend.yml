@@ -21,11 +21,11 @@ jobs:
         run: poetry install
       - name: mypy
         run: poetry run mypy
-  
+
   dockerize:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ env.GITHUB_REF == 'refs/heads/main' }}
+    if: github.ref == 'refs/heads/master'
     defaults:
       run:
         working-directory: ./backend
