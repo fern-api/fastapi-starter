@@ -17,6 +17,8 @@ jobs:
         run: npm install -g fern-api
       - name: fern generate
         run: fern generate
+        env:
+          FERN_TOKEN: dummy
       - name: Install dependencies
         run: yarn install
       - name: Lint
