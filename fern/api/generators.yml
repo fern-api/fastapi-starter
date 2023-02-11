@@ -8,7 +8,7 @@ groups:
           location: local-file-system
           path: ../../backend/src/fern_fastapi_starter/api/generated
       - name: fernapi/fern-typescript-sdk
-        version: 0.0.280
+        version: 0.0.281
         output:
           location: local-file-system
           path: ../../frontend/src/api/generated
