@@ -1,7 +1,8 @@
-from .api.generated import AbstractMoviesService, Movie, MovieId
+from .api.generated.resources.imdb.service.service import AbstractImdbService
+from .api.generated import Movie, MovieId
 
 
-class MoviesService(AbstractMoviesService):
+class MoviesService(AbstractImdbService):
     def get_movie(self, *, movie_id: str) -> Movie:
         return Movie(
             title="Goodwill Hunting",
