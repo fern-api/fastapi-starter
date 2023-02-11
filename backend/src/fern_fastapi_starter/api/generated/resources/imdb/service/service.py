@@ -15,10 +15,9 @@ from ..errors.movie_does_not_exist_error import MovieDoesNotExistError
 from ..types.movie import Movie
 
 
-class AbstractMoviesService(AbstractFernService):
+class AbstractImdbService(AbstractFernService):
     """
-    AbstractMoviesService is an abstract class containing the methods that your
-    MoviesService implementation should implement.
+    AbstractImdbService is an abstract class containing the methods that you should implement.
 
     Each method is associated with an API route, which will be registered
     with FastAPI when you register your implementation using Fern's register()
@@ -72,6 +71,6 @@ class AbstractMoviesService(AbstractFernService):
         router.get(
             path="/movies/{movie_id}",
             response_model=Movie,
-            description=AbstractMoviesService.get_movie.__doc__,
+            description=AbstractImdbService.get_movie.__doc__,
             **get_route_args(cls.get_movie, default_tag="imdb"),
         )(wrapper)
