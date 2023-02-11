@@ -3,12 +3,14 @@ groups:
   local:
     generators:
       - name: fernapi/fern-fastapi-server
-        version: 0.0.45
+        version: 0.0.48
         output:
           location: local-file-system
           path: ../../backend/src/fern_fastapi_starter/api/generated
       - name: fernapi/fern-typescript-sdk
-        version: 0.0.265
+        version: 0.0.281
         output:
           location: local-file-system
           path: ../../frontend/src/api/generated
+        config:
+          outputEsm: true

@@ -1,0 +1,16 @@
+export const SchemaType = {
+    DATE: "date",
+    ENUM: "enum",
+    LIST: "list",
+    STRING_LITERAL: "stringLiteral",
+    OBJECT: "object",
+    ANY: "any",
+    BOOLEAN: "boolean",
+    NUMBER: "number",
+    STRING: "string",
+    UNKNOWN: "unknown",
+    RECORD: "record",
+    SET: "set",
+    UNION: "union",
+    OPTIONAL: "optional",
+};

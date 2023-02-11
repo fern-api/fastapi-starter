@@ -1,0 +1,1 @@
+import{M as e,a as o}from"./index-79ef6011.js";const r=Object.freeze(Object.defineProperty({__proto__:null,Movie:e,MovieId:o},Symbol.toStringTag,{value:"Module"}));export{e as Movie,o as MovieId,r as imdb};

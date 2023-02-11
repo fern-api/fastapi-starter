@@ -11,10 +11,10 @@ import starlette
 from .core.abstract_fern_service import AbstractFernService
 from .core.exceptions import default_exception_handler, fern_http_exception_handler, http_exception_handler
 from .core.exceptions.fern_http_exception import FernHTTPException
-from .resources.imdb.service.service import AbstractMoviesService
+from .resources.imdb.service.service import AbstractImdbService
 
 
-def register(app: fastapi.FastAPI, *, imdb: AbstractMoviesService) -> None:
+def register(app: fastapi.FastAPI, *, imdb: AbstractImdbService) -> None:
     app.include_router(__register_service(imdb))
 
     app.add_exception_handler(FernHTTPException, fern_http_exception_handler)
