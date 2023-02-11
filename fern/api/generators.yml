@@ -12,3 +12,5 @@ groups:
         output:
           location: local-file-system
           path: ../../frontend/src/api/generated
+        config:
+          outputEsm: true

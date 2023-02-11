@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.string = void 0;
-const Schema_1 = require("../../Schema");
-const createIdentitySchemaCreator_1 = require("../../utils/createIdentitySchemaCreator");
-exports.string = (0, createIdentitySchemaCreator_1.createIdentitySchemaCreator)(Schema_1.SchemaType.STRING, (value) => {
+import { SchemaType } from "../../Schema";
+import { createIdentitySchemaCreator } from "../../utils/createIdentitySchemaCreator";
+export const string = createIdentitySchemaCreator(SchemaType.STRING, (value) => {
     if (typeof value === "string") {
         return {
             ok: true,

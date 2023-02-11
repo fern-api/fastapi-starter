@@ -1,20 +1,16 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.list = void 0;
-const Schema_1 = require("../../Schema");
-const schema_utils_1 = require("../schema-utils");
-function list(schema) {
+import { SchemaType } from "../../Schema";
+import { getSchemaUtils } from "../schema-utils";
+export function list(schema) {
     const baseSchema = {
         parse: async (raw, opts) => validateAndTransformArray(raw, (item) => schema.parse(item, opts)),
         json: (parsed, opts) => validateAndTransformArray(parsed, (item) => schema.json(item, opts)),
-        getType: () => Schema_1.SchemaType.LIST,
+        getType: () => SchemaType.LIST,
     };
     return {
         ...baseSchema,
-        ...(0, schema_utils_1.getSchemaUtils)(baseSchema),
+        ...getSchemaUtils(baseSchema),
     };
 }
-exports.list = list;
 async function validateAndTransformArray(value, transformItem) {
     if (!Array.isArray(value)) {
         return {

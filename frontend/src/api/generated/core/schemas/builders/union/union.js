@@ -1,18 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.union = void 0;
-const Schema_1 = require("../../Schema");
-const isPlainObject_1 = require("../../utils/isPlainObject");
-const keys_1 = require("../../utils/keys");
-const enum_1 = require("../enum");
-const object_like_1 = require("../object-like");
-const schema_utils_1 = require("../schema-utils");
-function union(discriminant, union) {
+import { SchemaType } from "../../Schema";
+import { isPlainObject, NOT_AN_OBJECT_ERROR_MESSAGE } from "../../utils/isPlainObject";
+import { keys } from "../../utils/keys";
+import { enum_ } from "../enum";
+import { getObjectLikeUtils } from "../object-like";
+import { getSchemaUtils } from "../schema-utils";
+export function union(discriminant, union) {
     const rawDiscriminant = typeof discriminant === "string" ? discriminant : discriminant.rawDiscriminant;
     const parsedDiscriminant = typeof discriminant === "string"
         ? discriminant
         : discriminant.parsedDiscriminant;
-    const discriminantValueSchema = (0, enum_1.enum_)((0, keys_1.keys)(union));
+    const discriminantValueSchema = enum_(keys(union));
     const baseSchema = {
         parse: async (raw, opts) => {
             return transformAndValidateUnion(raw, rawDiscriminant, parsedDiscriminant, (discriminantValue) => discriminantValueSchema.parse(discriminantValue, opts), (discriminantValue) => union[discriminantValue], opts?.allowUnknownKeys ?? false, (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.parse(additionalProperties, opts));
@@ -20,23 +17,22 @@ function union(discriminant, union) {
         json: async (parsed, opts) => {
             return transformAndValidateUnion(parsed, parsedDiscriminant, rawDiscriminant, (discriminantValue) => discriminantValueSchema.json(discriminantValue, opts), (discriminantValue) => union[discriminantValue], opts?.allowUnknownKeys ?? false, (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.json(additionalProperties, opts));
         },
-        getType: () => Schema_1.SchemaType.UNION,
+        getType: () => SchemaType.UNION,
     };
     return {
         ...baseSchema,
-        ...(0, schema_utils_1.getSchemaUtils)(baseSchema),
-        ...(0, object_like_1.getObjectLikeUtils)(baseSchema),
+        ...getSchemaUtils(baseSchema),
+        ...getObjectLikeUtils(baseSchema),
     };
 }
-exports.union = union;
 async function transformAndValidateUnion(value, discriminant, transformedDiscriminant, transformDiscriminantValue, getAdditionalPropertiesSchema, allowUnknownKeys, transformAdditionalProperties) {
-    if (!(0, isPlainObject_1.isPlainObject)(value)) {
+    if (!isPlainObject(value)) {
         return {
             ok: false,
             errors: [
                 {
                     path: [],
-                    message: isPlainObject_1.NOT_AN_OBJECT_ERROR_MESSAGE,
+                    message: NOT_AN_OBJECT_ERROR_MESSAGE,
                 },
             ],
         };

@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = void 0;
-const Schema_1 = require("../../Schema");
-const list_1 = require("../list");
-const schema_utils_1 = require("../schema-utils");
-function set(schema) {
-    const listSchema = (0, list_1.list)(schema);
+import { SchemaType } from "../../Schema";
+import { list } from "../list";
+import { getSchemaUtils } from "../schema-utils";
+export function set(schema) {
+    const listSchema = list(schema);
     const baseSchema = {
         parse: async (raw, opts) => {
             const parsedList = await listSchema.parse(raw, opts);
@@ -34,11 +31,10 @@ function set(schema) {
             const jsonList = await listSchema.json([...parsed], opts);
             return jsonList;
         },
-        getType: () => Schema_1.SchemaType.SET,
+        getType: () => SchemaType.SET,
     };
     return {
         ...baseSchema,
-        ...(0, schema_utils_1.getSchemaUtils)(baseSchema),
+        ...getSchemaUtils(baseSchema),
     };
 }
-exports.set = set;

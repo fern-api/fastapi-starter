@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Supplier = void 0;
-exports.Supplier = {
+export const Supplier = {
     get: async (supplier) => {
         if (typeof supplier === "function") {
             return supplier();

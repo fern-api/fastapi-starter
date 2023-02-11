@@ -1,25 +1,22 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getObjectUtils = exports.object = void 0;
-const Schema_1 = require("../../Schema");
-const entries_1 = require("../../utils/entries");
-const filterObject_1 = require("../../utils/filterObject");
-const isPlainObject_1 = require("../../utils/isPlainObject");
-const keys_1 = require("../../utils/keys");
-const partition_1 = require("../../utils/partition");
-const object_like_1 = require("../object-like");
-const schema_utils_1 = require("../schema-utils");
-const property_1 = require("./property");
-function object(schemas) {
+import { SchemaType } from "../../Schema";
+import { entries } from "../../utils/entries";
+import { filterObject } from "../../utils/filterObject";
+import { isPlainObject, NOT_AN_OBJECT_ERROR_MESSAGE } from "../../utils/isPlainObject";
+import { keys } from "../../utils/keys";
+import { partition } from "../../utils/partition";
+import { getObjectLikeUtils } from "../object-like";
+import { getSchemaUtils } from "../schema-utils";
+import { isProperty } from "./property";
+export function object(schemas) {
     const baseSchema = {
-        _getRawProperties: () => Promise.resolve(Object.entries(schemas).map(([parsedKey, propertySchema]) => (0, property_1.isProperty)(propertySchema) ? propertySchema.rawKey : parsedKey)),
-        _getParsedProperties: () => Promise.resolve((0, keys_1.keys)(schemas)),
+        _getRawProperties: () => Promise.resolve(Object.entries(schemas).map(([parsedKey, propertySchema]) => isProperty(propertySchema) ? propertySchema.rawKey : parsedKey)),
+        _getParsedProperties: () => Promise.resolve(keys(schemas)),
         parse: async (raw, opts) => {
             const rawKeyToProperty = {};
             const requiredKeys = [];
-            for (const [parsedKey, schemaOrObjectProperty] of (0, entries_1.entries)(schemas)) {
-                const rawKey = (0, property_1.isProperty)(schemaOrObjectProperty) ? schemaOrObjectProperty.rawKey : parsedKey;
-                const valueSchema = (0, property_1.isProperty)(schemaOrObjectProperty)
+            for (const [parsedKey, schemaOrObjectProperty] of entries(schemas)) {
+                const rawKey = isProperty(schemaOrObjectProperty) ? schemaOrObjectProperty.rawKey : parsedKey;
+                const valueSchema = isProperty(schemaOrObjectProperty)
                     ? schemaOrObjectProperty.valueSchema
                     : schemaOrObjectProperty;
                 const property = {
@@ -50,8 +47,8 @@ function object(schemas) {
         },
         json: async (parsed, opts) => {
             const requiredKeys = [];
-            for (const [parsedKey, schemaOrObjectProperty] of (0, entries_1.entries)(schemas)) {
-                const valueSchema = (0, property_1.isProperty)(schemaOrObjectProperty)
+            for (const [parsedKey, schemaOrObjectProperty] of entries(schemas)) {
+                const valueSchema = isProperty(schemaOrObjectProperty)
                     ? schemaOrObjectProperty.valueSchema
                     : schemaOrObjectProperty;
                 if ((await valueSchema.getType()) !== "optional") {
@@ -67,7 +64,7 @@ function object(schemas) {
                     if (property == null) {
                         return undefined;
                     }
-                    if ((0, property_1.isProperty)(property)) {
+                    if (isProperty(property)) {
                         return {
                             transformedKey: property.rawKey,
                             transform: (propertyValue) => property.valueSchema.json(propertyValue, opts),
@@ -83,24 +80,23 @@ function object(schemas) {
                 allowUnknownKeys: opts?.allowUnknownKeys ?? false,
             });
         },
-        getType: () => Schema_1.SchemaType.OBJECT,
+        getType: () => SchemaType.OBJECT,
     };
     return {
         ...baseSchema,
-        ...(0, schema_utils_1.getSchemaUtils)(baseSchema),
-        ...(0, object_like_1.getObjectLikeUtils)(baseSchema),
+        ...getSchemaUtils(baseSchema),
+        ...getObjectLikeUtils(baseSchema),
         ...getObjectUtils(baseSchema),
     };
 }
-exports.object = object;
 async function validateAndTransformObject({ value, requiredKeys, getProperty, allowUnknownKeys, }) {
-    if (!(0, isPlainObject_1.isPlainObject)(value)) {
+    if (!isPlainObject(value)) {
         return {
             ok: false,
             errors: [
                 {
                     path: [],
-                    message: isPlainObject_1.NOT_AN_OBJECT_ERROR_MESSAGE,
+                    message: NOT_AN_OBJECT_ERROR_MESSAGE,
                 },
             ],
         };
@@ -152,7 +148,7 @@ async function validateAndTransformObject({ value, requiredKeys, getProperty, al
         };
     }
 }
-function getObjectUtils(schema) {
+export function getObjectUtils(schema) {
     return {
         extend: (extension) => {
             const baseSchema = {
@@ -180,23 +176,22 @@ function getObjectUtils(schema) {
                         transformExtension: (parsedExtension) => extension.json(parsedExtension, opts),
                     });
                 },
-                getType: () => Schema_1.SchemaType.OBJECT,
+                getType: () => SchemaType.OBJECT,
             };
             return {
                 ...baseSchema,
-                ...(0, schema_utils_1.getSchemaUtils)(baseSchema),
-                ...(0, object_like_1.getObjectLikeUtils)(baseSchema),
+                ...getSchemaUtils(baseSchema),
+                ...getObjectLikeUtils(baseSchema),
                 ...getObjectUtils(baseSchema),
             };
         },
     };
 }
-exports.getObjectUtils = getObjectUtils;
 async function validateAndTransformExtendedObject({ extensionKeys, value, transformBase, transformExtension, }) {
     const extensionPropertiesSet = new Set(extensionKeys);
-    const [extensionProperties, baseProperties] = (0, partition_1.partition)((0, keys_1.keys)(value), (key) => extensionPropertiesSet.has(key));
-    const transformedBase = await transformBase((0, filterObject_1.filterObject)(value, baseProperties));
-    const transformedExtension = await transformExtension((0, filterObject_1.filterObject)(value, extensionProperties));
+    const [extensionProperties, baseProperties] = partition(keys(value), (key) => extensionPropertiesSet.has(key));
+    const transformedBase = await transformBase(filterObject(value, baseProperties));
+    const transformedExtension = await transformExtension(filterObject(value, extensionProperties));
     if (transformedBase.ok && transformedExtension.ok) {
         return {
             ok: true,

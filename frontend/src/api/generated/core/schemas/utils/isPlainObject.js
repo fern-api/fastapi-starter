@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPlainObject = exports.NOT_AN_OBJECT_ERROR_MESSAGE = void 0;
-exports.NOT_AN_OBJECT_ERROR_MESSAGE = "Not an object";
+export const NOT_AN_OBJECT_ERROR_MESSAGE = "Not an object";
 // borrowed from https://github.com/lodash/lodash/blob/master/isPlainObject.js
-function isPlainObject(value) {
+export function isPlainObject(value) {
     if (typeof value !== "object" || value === null) {
         return false;
     }
@@ -16,4 +13,3 @@ function isPlainObject(value) {
     }
     return Object.getPrototypeOf(value) === proto;
 }
-exports.isPlainObject = isPlainObject;
