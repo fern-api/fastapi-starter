@@ -6,7 +6,7 @@ import * as serializers from "../../../../serialization";
 import urlJoin from "url-join";
 import * as core from "../../../../core";
 import * as errors from "../../../../errors";
-export class Client {
+export class Imdb {
     options;
     constructor(options) {
         this.options = options;

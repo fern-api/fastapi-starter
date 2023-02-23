@@ -1,7 +1,4 @@
 import { APIResponse } from "./APIResponse";
-export interface Fetcher {
-    fetch: FetchFunction;
-}
 export declare type FetchFunction = (args: Fetcher.Args) => Promise<APIResponse<unknown, Fetcher.Error>>;
 export declare namespace Fetcher {
     interface Args {
