@@ -12,10 +12,30 @@ export function union(discriminant, union) {
     const discriminantValueSchema = enum_(keys(union));
     const baseSchema = {
         parse: async (raw, opts) => {
-            return transformAndValidateUnion(raw, rawDiscriminant, parsedDiscriminant, (discriminantValue) => discriminantValueSchema.parse(discriminantValue, opts), (discriminantValue) => union[discriminantValue], opts?.allowUnknownKeys ?? false, (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.parse(additionalProperties, opts));
+            return transformAndValidateUnion({
+                value: raw,
+                discriminant: rawDiscriminant,
+                transformedDiscriminant: parsedDiscriminant,
+                transformDiscriminantValue: (discriminantValue) => discriminantValueSchema.parse(discriminantValue, {
+                    allowUnrecognizedEnumValues: opts?.allowUnrecognizedUnionMembers,
+                }),
+                getAdditionalPropertiesSchema: (discriminantValue) => union[discriminantValue],
+                allowUnrecognizedUnionMembers: opts?.allowUnrecognizedUnionMembers,
+                transformAdditionalProperties: (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.parse(additionalProperties, opts),
+            });
         },
         json: async (parsed, opts) => {
-            return transformAndValidateUnion(parsed, parsedDiscriminant, rawDiscriminant, (discriminantValue) => discriminantValueSchema.json(discriminantValue, opts), (discriminantValue) => union[discriminantValue], opts?.allowUnknownKeys ?? false, (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.json(additionalProperties, opts));
+            return transformAndValidateUnion({
+                value: parsed,
+                discriminant: parsedDiscriminant,
+                transformedDiscriminant: rawDiscriminant,
+                transformDiscriminantValue: (discriminantValue) => discriminantValueSchema.json(discriminantValue, {
+                    allowUnrecognizedEnumValues: opts?.allowUnrecognizedUnionMembers,
+                }),
+                getAdditionalPropertiesSchema: (discriminantValue) => union[discriminantValue],
+                allowUnrecognizedUnionMembers: opts?.allowUnrecognizedUnionMembers,
+                transformAdditionalProperties: (additionalProperties, additionalPropertiesSchema) => additionalPropertiesSchema.json(additionalProperties, opts),
+            });
         },
         getType: () => SchemaType.UNION,
     };
@@ -25,7 +45,7 @@ export function union(discriminant, union) {
         ...getObjectLikeUtils(baseSchema),
     };
 }
-async function transformAndValidateUnion(value, discriminant, transformedDiscriminant, transformDiscriminantValue, getAdditionalPropertiesSchema, allowUnknownKeys, transformAdditionalProperties) {
+async function transformAndValidateUnion({ value, discriminant, transformedDiscriminant, transformDiscriminantValue, getAdditionalPropertiesSchema, allowUnrecognizedUnionMembers = false, transformAdditionalProperties, }) {
     if (!isPlainObject(value)) {
         return {
             ok: false,
@@ -61,7 +81,7 @@ async function transformAndValidateUnion(value, discriminant, transformedDiscrim
     }
     const additionalPropertiesSchema = getAdditionalPropertiesSchema(transformedDiscriminantValue.value);
     if (additionalPropertiesSchema == null) {
-        if (allowUnknownKeys) {
+        if (allowUnrecognizedUnionMembers) {
             return {
                 ok: true,
                 value: {

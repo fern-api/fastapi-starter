@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import "./App.css";
 import { ImdbApi, ImdbApiClient } from "./api";
+import { Movie } from "./api/generated/serialization";
 
 const BACKEND_CLIENT = new ImdbApiClient({
     environment: "http://localhost:8080",

@@ -18,17 +18,22 @@ export class Imdb {
         const _response = await core.fetcher({
             url: urlJoin(this.options.environment, `/movies/${await serializers.MovieId.jsonOrThrow(movieId)}`),
             method: "GET",
+            contentType: "application/json",
         });
         if (_response.ok) {
             return await serializers.Movie.parseOrThrow(_response.body, {
-                allowUnknownKeys: true,
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
             });
         }
         if (_response.error.reason === "status-code") {
             switch (_response.error.body?.["error"]) {
                 case "MovieDoesNotExistError":
                     throw new ImdbApi.MovieDoesNotExistError(await serializers.MovieId.parseOrThrow(_response.error.body, {
-                        allowUnknownKeys: true,
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
                     }));
                 default:
                     throw new errors.ImdbApiError({

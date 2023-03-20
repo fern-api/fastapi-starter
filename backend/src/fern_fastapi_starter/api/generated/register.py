@@ -14,12 +14,12 @@ from .core.exceptions.fern_http_exception import FernHTTPException
 from .resources.imdb.service.service import AbstractImdbService
 
 
-def register(app: fastapi.FastAPI, *, imdb: AbstractImdbService) -> None:
-    app.include_router(__register_service(imdb))
+def register(_app: fastapi.FastAPI, *, imdb: AbstractImdbService) -> None:
+    _app.include_router(__register_service(imdb))
 
-    app.add_exception_handler(FernHTTPException, fern_http_exception_handler)
-    app.add_exception_handler(starlette.exceptions.HTTPException, http_exception_handler)
-    app.add_exception_handler(Exception, default_exception_handler)
+    _app.add_exception_handler(FernHTTPException, fern_http_exception_handler)
+    _app.add_exception_handler(starlette.exceptions.HTTPException, http_exception_handler)
+    _app.add_exception_handler(Exception, default_exception_handler)
 
 
 def __register_service(service: AbstractFernService) -> fastapi.APIRouter:

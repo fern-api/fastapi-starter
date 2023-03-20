@@ -1,8 +1,9 @@
 import axios from "axios";
 export const fetcher = async (args) => {
-    const headers = {
-        "Content-Type": "application/json",
-    };
+    const headers = {};
+    if (args.contentType != null) {
+        headers["Content-Type"] = args.contentType;
+    }
     if (args.headers != null) {
         for (const [key, value] of Object.entries(args.headers)) {
             if (value != null) {
