@@ -3,7 +3,10 @@ groups:
   local:
     generators:
       - name: fernapi/fern-fastapi-server
-        version: 0.1.0
+        version: 0.2.0-rc0
+        config: 
+          pydantic_config: 
+            orm_mode: true
         output:
           location: local-file-system
           path: ../../backend/src/fern_fastapi_starter/api/generated
