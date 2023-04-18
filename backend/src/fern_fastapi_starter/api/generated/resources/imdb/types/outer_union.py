@@ -16,6 +16,7 @@ T_Result = typing.TypeVar("T_Result")
 
 class _Factory:
     def child(self, value: InnerUnion) -> OuterUnion:
+        # return OuterUnion(__root__=_OuterUnion.Child(**dict(value), type="child"))
         return OuterUnion(__root__=_OuterUnion.Child(**value.dict(exclude_unset=True), type="child"))
 
 
