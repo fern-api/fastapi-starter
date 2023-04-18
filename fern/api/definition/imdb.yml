@@ -23,6 +23,15 @@ types:
       rating:
         type: double
         docs: The rating scale is one to five stars
+  
+  OuterUnion:
+    union:
+      child: InnerUnion
+
+  InnerUnion:
+    properties:
+      field_a: optional<string>
+      field_b: optional<integer>
 
 errors:
   MovieDoesNotExistError:
