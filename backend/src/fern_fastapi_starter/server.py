@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.generated.register import register
@@ -7,7 +7,12 @@ from .movies_service import MoviesService
 
 app = FastAPI()
 
-register(app, imdb=MoviesService())
+
+async def some_dependency():
+    return
+
+
+register(app, imdb=MoviesService(), dependencies=[Depends(some_dependency)])
 
 app.add_middleware(
     CORSMiddleware,
