@@ -2,6 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# import all the validators before running the server
+from .validators import * # noqa
+
 from .api.generated.register import register
 from .movies_service import MoviesService
 

@@ -7,6 +7,8 @@ groups:
         output:
           location: local-file-system
           path: ../../backend/src/fern_fastapi_starter/api/generated
+        config: 
+          include_validators: true
       - name: fernapi/fern-typescript-sdk
         version: 0.5.2
         output:
