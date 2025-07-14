@@ -16,9 +16,9 @@ distlib==0.3.6 ; python_version >= "3.8" and python_version < "4.0" \
 fastapi-utils==0.2.1 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:0e6c7fc1870b80e681494957abf65d4f4f42f4c7f70005918e9181b22f1bd759 \
     --hash=sha256:dd0be7dc7f03fa681b25487a206651d99f2330d5a567fb8ab6cb5f8a06a29360
-fastapi==0.79.1 ; python_version >= "3.8" and python_version < "4.0" \
-    --hash=sha256:006862dec0f0f5683ac21fb0864af2ff12a931e7ba18920f28cc8eceed51896b \
-    --hash=sha256:3c584179c64e265749e88221c860520fc512ea37e253282dab378cc503dfd7fd
+fastapi==0.116.1 ; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:c46ac7c312df840f0c9e220f7964bada936781bc4e2e6eb71f1c4d7553786565 \
+    --hash=sha256:ed52cbf946abfd70c5a0dccb24673f0670deeb517a88b3544d03c2a6bf283143
 filelock==3.8.2 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:7565f628ea56bfcd8e54e42bdc55da899c85c1abfe1b5bcfd147e9188cebb3b2 \
     --hash=sha256:8df285554452285f79c035efb0c861eb33a4bcfa5b7a137016e32e6a90f9792c
