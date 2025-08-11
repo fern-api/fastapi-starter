@@ -98,9 +98,9 @@ nodeenv==1.7.0 ; python_version >= "3.8" and python_version < "4.0" \
 platformdirs==2.6.0 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:1a89a12377800c81983db6be069ec068eee989748799b946cce2a6e80dcc54ca \
     --hash=sha256:b46ffafa316e6b83b47489d240ce17173f123a9b9c83282141c3daf26ad9ac2e
-pre-commit==2.20.0 ; python_version >= "3.8" and python_version < "4.0" \
-    --hash=sha256:51a5ba7c480ae8072ecdb6933df22d2f812dc897d5fe848778116129a681aac7 \
-    --hash=sha256:a978dac7bc9ec0bcee55c18a277d553b0f419d259dadb4b9418ff2d00eb43959
+pre-commit==4.3.0 ; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:2b0747ad7e6e967169136edffee14c16e148a778a54e4f967921aa1ebf2308d8 \
+    --hash=sha256:499fe450cc9d42e9d58e606262795ecb64dd05438943c62b66f6a8673da30b16
 pydantic==1.10.2 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:05e00dbebbe810b33c7a7362f231893183bcc4251f3f2ff991c31d5c08240c42 \
     --hash=sha256:06094d18dd5e6f2bbf93efa54991c3240964bb663b87729ac340eb5014310624 \
