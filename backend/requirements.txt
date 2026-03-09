@@ -95,9 +95,9 @@ idna==3.4 ; python_version >= "3.8" and python_version < "4.0" \
 nodeenv==1.7.0 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:27083a7b96a25f2f5e1d8cb4b6317ee8aeda3bdd121394e5ac54e498028a042e \
     --hash=sha256:e0e7f7dfb85fc5394c6fe1e8fa98131a2473e04311a45afb6508f7cf1836fa2b
-platformdirs==2.6.0 ; python_version >= "3.8" and python_version < "4.0" \
-    --hash=sha256:1a89a12377800c81983db6be069ec068eee989748799b946cce2a6e80dcc54ca \
-    --hash=sha256:b46ffafa316e6b83b47489d240ce17173f123a9b9c83282141c3daf26ad9ac2e
+platformdirs==4.4.0 ; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:abd01743f24e5287cd7a5db3752faf1a2d65353f38ec26d98e25a6db65958c85 \
+    --hash=sha256:ca753cf4d81dc309bc67b0ea38fd15dc97bc30ce419a7f58d13eb3bf14c4febf
 pre-commit==2.20.0 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:51a5ba7c480ae8072ecdb6933df22d2f812dc897d5fe848778116129a681aac7 \
     --hash=sha256:a978dac7bc9ec0bcee55c18a277d553b0f419d259dadb4b9418ff2d00eb43959
